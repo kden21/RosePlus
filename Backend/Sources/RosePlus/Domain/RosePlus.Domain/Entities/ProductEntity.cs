@@ -1,3 +1,5 @@
+using RosePlus.Contracts.Enums;
+
 namespace RosePlus.Domain.Entities;
 
 public class ProductEntity : BaseEntity
@@ -21,4 +23,24 @@ public class ProductEntity : BaseEntity
     /// Колличество товара.
     /// </summary>
     public int Count { get; set; }
+    
+    /// <summary>
+    /// Статус товара.
+    /// </summary>
+    public StatusProduct Status { get; set; }
+    
+    /// <summary>
+    /// Идентификатор категории товара.
+    /// </summary>
+    public int CategoryId { get; set; }
+    
+    /// <summary>
+    /// Категория товара.
+    /// </summary>
+    public CategoryEntity Category { get; set; }
+    
+    /// <summary>
+    /// Коллекция значений атрибутов.
+    /// </summary>
+    public ICollection<AttributeValueEntity> AttributeValues { get; set; }
 }

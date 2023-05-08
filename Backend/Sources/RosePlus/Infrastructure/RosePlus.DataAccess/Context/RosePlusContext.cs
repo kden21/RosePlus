@@ -15,7 +15,9 @@ public class RosePlusContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new RoseItemConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductConfiguration());
         modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new AttributeConfiguration());
+        modelBuilder.ApplyConfiguration(new AttributeValueConfiguration());
     }
 }

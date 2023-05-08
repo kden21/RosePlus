@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RosePlus.Migrations;
@@ -11,9 +12,11 @@ using RosePlus.Migrations;
 namespace RosePlus.Migrations.Migrations
 {
     [DbContext(typeof(MigrationsDbContext))]
-    partial class MigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230508172511_Update_Categories_1")]
+    partial class Update_Categories_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,9 +104,6 @@ namespace RosePlus.Migrations.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AttributeId");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
 
                     b.ToTable("AttributeValues", (string)null);
                 });

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RosePlus.Migrations;
@@ -11,9 +12,11 @@ using RosePlus.Migrations;
 namespace RosePlus.Migrations.Migrations
 {
     [DbContext(typeof(MigrationsDbContext))]
-    partial class MigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230508170629_Update_AttributeValue_1")]
+    partial class Update_AttributeValue_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,9 +105,6 @@ namespace RosePlus.Migrations.Migrations
 
                     b.HasIndex("AttributeId");
 
-                    b.HasIndex("Id")
-                        .IsUnique();
-
                     b.ToTable("AttributeValues", (string)null);
                 });
 
@@ -127,12 +127,7 @@ namespace RosePlus.Migrations.Migrations
                         .HasMaxLength(400)
                         .HasColumnType("character varying(400)");
 
-                    b.Property<int>("ParentCategoryId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories", (string)null);
                 });
@@ -221,17 +216,6 @@ namespace RosePlus.Migrations.Migrations
                     b.Navigation("Attribute");
                 });
 
-            modelBuilder.Entity("RosePlus.Domain.Entities.CategoryEntity", b =>
-                {
-                    b.HasOne("RosePlus.Domain.Entities.CategoryEntity", "ParentCategory")
-                        .WithMany("ChildCategories")
-                        .HasForeignKey("ParentCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ParentCategory");
-                });
-
             modelBuilder.Entity("RosePlus.Domain.Entities.ProductEntity", b =>
                 {
                     b.HasOne("RosePlus.Domain.Entities.CategoryEntity", "Category")
@@ -250,8 +234,6 @@ namespace RosePlus.Migrations.Migrations
 
             modelBuilder.Entity("RosePlus.Domain.Entities.CategoryEntity", b =>
                 {
-                    b.Navigation("ChildCategories");
-
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
