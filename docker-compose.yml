@@ -1,8 +1,16 @@
 services:
+
+  angular:
+    build:
+      context: .
+      dockerfile: Frontend/Dockerfile
+    ports:
+      - "80:80"
+      
   postgres:
     build:
       context: .
-      dockerfile: /Postgres/Dockerfile
+      dockerfile: /Database/Dockerfile
     image: "postgres-roseplus"
     container_name: ${PG_CONTAINER_NAME}
     environment:
@@ -11,10 +19,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: ${PGDATA}
     volumes:
-       - dbtuto:/data/postgres-tuto
+       - db_volume:/data/postgres-volume
     ports:
       - "5432:5432"
     restart: unless-stopped
+    
 volumes:
-    dbtuto:
+    db_volume:
       external: true
