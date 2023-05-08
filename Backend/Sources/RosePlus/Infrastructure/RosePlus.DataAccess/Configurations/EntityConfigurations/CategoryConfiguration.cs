@@ -1,0 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RosePlus.Domain.Entities;
+
+namespace RosePlus.DataAccess.Configurations.EntityConfigurations;
+
+public class CategoryConfiguration : IEntityTypeConfiguration<CategoryEntity>
+{
+    public void Configure(EntityTypeBuilder<CategoryEntity> builder)
+    {
+        builder.ToTable("Categories");
+    
+        builder.HasKey(category => category.Id);
+        builder.Property(category => category.Id).ValueGeneratedOnAdd();
+    
+        builder.Property(category => category.Name).HasMaxLength(400);
+
+        builder.HasMany(category => category.RoseItems)
+            .WithOne(roseItem => roseItem.Category)
+            .HasForeignKey(roseItem => roseItem.CategoryId);
+    }
+}
