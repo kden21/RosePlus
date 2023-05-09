@@ -8,8 +8,8 @@ namespace RosePlus.Contracts.Exceptions;
 [Serializable]
 public class WrongDataException : BaseException
 {
-    public WrongDataException(string userMessage)
-        : base(ExceptionUserMessage.WrongData, userMessage)
+    public WrongDataException(string logMessage)
+        : base(logMessage, ExceptionUserMessage.WrongData)
     {
     }
 }

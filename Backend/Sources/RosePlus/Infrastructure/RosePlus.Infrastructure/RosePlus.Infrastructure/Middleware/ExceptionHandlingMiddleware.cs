@@ -1,6 +1,10 @@
 using System.Net.Mime;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using RosePlus.AppServices.LoggerDb;
 using RosePlus.Contracts.ApiResult;
 using RosePlus.Contracts.Exceptions;
 
@@ -11,11 +15,21 @@ namespace RosePlus.Infrastructure.Middleware;
 /// </summary>
 public class ExceptionHandlingMiddleware
 {
-     private readonly RequestDelegate _next;
+    private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+    private readonly RequestDelegate _next;
+    private JsonSerializerOptions _jsonSerializerOptions;
 
-    public ExceptionHandlingMiddleware(RequestDelegate next)
+    public ExceptionHandlingMiddleware(
+        RequestDelegate next, 
+        ILogger<ExceptionHandlingMiddleware> logger)
     {
         _next = next;
+        _logger = logger;
+        _jsonSerializerOptions = new JsonSerializerOptions
+        {
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All, UnicodeRanges.All),
+            WriteIndented = true
+        };
     }
 
     public async Task Invoke(HttpContext context)
@@ -24,63 +38,35 @@ public class ExceptionHandlingMiddleware
         {
             await _next(context);
         }
-        catch (BaseException exception)
+        catch (BaseException baseException)
         {
-            context.Response.StatusCode = StatusCodes.Status200OK;//;.Status404NotFound;
-            await context.Response.WriteAsync( JsonSerializer.Serialize(new ApiResult<string>
-            {
-                //Message = exception.,
+            context.Response.StatusCode = StatusCodes.Status200OK;
+            
+            _logger.Log(LogLevel.Error, baseException.Message);
+            
+            await context.Response.WriteAsync( JsonSerializer.Serialize(new ApiResult<ApiError>{
+                Data = new ApiError
+                {
+                    Message = baseException.UserMessage,
+                    TraceId = context.TraceIdentifier
+                },
                 IsSuccess = false,
-            }));
+            }, _jsonSerializerOptions));
         }
         catch (Exception exception)
         {
-            Console.WriteLine(exception);
             context.Response.ContentType = MediaTypeNames.Application.Json;
             
-            switch (exception)
-            {
-                case EntityNotFoundException:
-                    context.Response.StatusCode = StatusCodes.Status200OK;//;.Status404NotFound;
-                    await context.Response.WriteAsync( JsonSerializer.Serialize(new ApiResult<string>
-                    {
-                        Message = exception.Message,
-                        IsSuccess = false,
-                    }));
-                    break;
-                case EntityUpdateException:
-                    context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
-                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
-                    {
-                        traceId = context.TraceIdentifier, 
-                        message = exception.Message
-                    }));
-                    break;
-                case EntityCreateException:
-                    context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
-                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
-                    {
-                        traceId = context.TraceIdentifier, 
-                        message = exception.Message
-                    }));
-                    break;
-                case WrongDataException:
-                    context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
-                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
-                    {
-                        traceId = context.TraceIdentifier, 
-                        message = exception.Message
-                    }));
-                    break;
-                default:
-                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
-                    {
-                        traceId = context.TraceIdentifier, 
-                        message = "Произошла непредвиденная ошибка."
-                    }));
-                    break;
-            }
+            _logger.Log(LogLevel.Critical, exception.Message);
+            
+            await context.Response.WriteAsync( JsonSerializer.Serialize(new ApiResult<ApiError>{
+                Data = new ApiError
+                {
+                    Message = "Произошла непредвиденная ошибка.",
+                    TraceId = context.TraceIdentifier
+                },
+                IsSuccess = false,
+            }, _jsonSerializerOptions));
         }
     }
 }

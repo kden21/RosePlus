@@ -17,8 +17,8 @@ public static class RosePlusRegistrar
     {
         ConfigurationManager configuration = builder.Configuration;
         builder.Services
-            .AddAppServices(configuration)
-            .AddDataAccessServices();
+            .AddDataAccessServices()
+            .AddAppServices(configuration);
         return builder;
     }
     public static IServiceCollection AddDataAccessServices(this IServiceCollection services)
@@ -34,6 +34,7 @@ public static class RosePlusRegistrar
 
         services.AddScoped( typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ILoggerDbRepository, LoggerRepository>();
         
         return services;
     }
@@ -41,6 +42,7 @@ public static class RosePlusRegistrar
     public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IProductService, ProductService>();
+        //services.
         
         return services;
     }

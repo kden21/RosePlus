@@ -1,15 +1,19 @@
 using Microsoft.Extensions.Logging;
+using RosePlus.AppServices.Repositories;
+using RosePlus.AppServices.Services;
+using RosePlus.Domain.Entities;
 
-namespace RosePlus.AppServices;
+namespace RosePlus.AppServices.LoggerDb;
 
 public class LoggerDbService : ILogger, IDisposable
 {
-    static object _lock = new object();
-    
-    public LoggerDbService()
+    private readonly ILoggerDbRepository _loggerDbRepository;
+    //private readonly IProductService _productService;
+    public LoggerDbService(ILoggerDbRepository loggerDbRepository)
     {
-        
+        _loggerDbRepository = loggerDbRepository;
     }
+
     public IDisposable BeginScope<TState>(TState state)
     {
         return this;
@@ -29,6 +33,7 @@ public class LoggerDbService : ILogger, IDisposable
         Exception? exception, 
         Func<TState, Exception?, string> formatter)
     {
-        
+        var e = new LogEntity();
+        _loggerDbRepository.AddLog(e, CancellationToken.None);
     }
 }

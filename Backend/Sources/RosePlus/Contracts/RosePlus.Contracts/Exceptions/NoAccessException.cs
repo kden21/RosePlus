@@ -8,8 +8,8 @@ namespace RosePlus.Contracts.Exceptions;
 [Serializable]
 public class NoAccessException: BaseException
 {
-    public NoAccessException(string userMessage)
-        : base(ExceptionUserMessage.NoAccess, userMessage)
+    public NoAccessException(string logMessage)
+        : base(logMessage, ExceptionUserMessage.NoAccess)
     {
     }
 }

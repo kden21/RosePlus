@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\AppServices\RosePlus.AppServices\RosePlus.AppServices\RosePlus.AppServices.csproj" />
       <ProjectReference Include="..\..\..\Contracts\RosePlus.Contracts\RosePlus.Contracts.csproj" />
     </ItemGroup>
 

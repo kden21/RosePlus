@@ -8,8 +8,8 @@ namespace RosePlus.Contracts.Exceptions;
 [Serializable]
 public class EntityCreateException : BaseException
 {
-    public EntityCreateException(string message)
-        : base(ExceptionUserMessage.EntityCreate, message)
+    public EntityCreateException(string logMessage)
+        : base(logMessage, ExceptionUserMessage.EntityCreate)
     {
     }
 }
