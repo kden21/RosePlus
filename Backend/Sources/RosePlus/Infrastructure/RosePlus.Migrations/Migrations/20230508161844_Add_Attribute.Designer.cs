@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RosePlus.Migrations;
@@ -11,9 +12,11 @@ using RosePlus.Migrations;
 namespace RosePlus.Migrations.Migrations
 {
     [DbContext(typeof(MigrationsDbContext))]
-    partial class MigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230508161844_Add_Attribute")]
+    partial class Add_Attribute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,22 +37,7 @@ namespace RosePlus.Migrations.Migrations
 
                     b.HasIndex("CategoriesId");
 
-                    b.ToTable("Category_Attribute", (string)null);
-                });
-
-            modelBuilder.Entity("AttributeValueEntityProductEntity", b =>
-                {
-                    b.Property<int>("AttributeValuesId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("AttributeValuesId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("Product_AttributeValue", (string)null);
+                    b.ToTable("AttributeEntityCategoryEntity");
                 });
 
             modelBuilder.Entity("RosePlus.Domain.Entities.AttributeEntity", b =>
@@ -68,44 +56,11 @@ namespace RosePlus.Migrations.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(400)
-                        .HasColumnType("character varying(400)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Attributes", (string)null);
-                });
-
-            modelBuilder.Entity("RosePlus.Domain.Entities.AttributeValueEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AttributeId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("ModifyDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(400)
-                        .HasColumnType("character varying(400)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttributeId");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.ToTable("AttributeValues", (string)null);
+                    b.ToTable("AttributeEntity");
                 });
 
             modelBuilder.Entity("RosePlus.Domain.Entities.CategoryEntity", b =>
@@ -127,12 +82,7 @@ namespace RosePlus.Migrations.Migrations
                         .HasMaxLength(400)
                         .HasColumnType("character varying(400)");
 
-                    b.Property<int?>("ParentCategoryId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories", (string)null);
                 });
@@ -195,41 +145,6 @@ namespace RosePlus.Migrations.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AttributeValueEntityProductEntity", b =>
-                {
-                    b.HasOne("RosePlus.Domain.Entities.AttributeValueEntity", null)
-                        .WithMany()
-                        .HasForeignKey("AttributeValuesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RosePlus.Domain.Entities.ProductEntity", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RosePlus.Domain.Entities.AttributeValueEntity", b =>
-                {
-                    b.HasOne("RosePlus.Domain.Entities.AttributeEntity", "Attribute")
-                        .WithMany("AttributeValues")
-                        .HasForeignKey("AttributeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Attribute");
-                });
-
-            modelBuilder.Entity("RosePlus.Domain.Entities.CategoryEntity", b =>
-                {
-                    b.HasOne("RosePlus.Domain.Entities.CategoryEntity", "ParentCategory")
-                        .WithMany("ChildCategories")
-                        .HasForeignKey("ParentCategoryId");
-
-                    b.Navigation("ParentCategory");
-                });
-
             modelBuilder.Entity("RosePlus.Domain.Entities.ProductEntity", b =>
                 {
                     b.HasOne("RosePlus.Domain.Entities.CategoryEntity", "Category")
@@ -241,15 +156,8 @@ namespace RosePlus.Migrations.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("RosePlus.Domain.Entities.AttributeEntity", b =>
-                {
-                    b.Navigation("AttributeValues");
-                });
-
             modelBuilder.Entity("RosePlus.Domain.Entities.CategoryEntity", b =>
                 {
-                    b.Navigation("ChildCategories");
-
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618

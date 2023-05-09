@@ -9,13 +9,15 @@ public class RosePlusContext : DbContext
     /// Инициализирует экземпляр <see cref="RosePlusContext"/>>
     /// </summary>
     /// <param name="options"></param>
-    protected RosePlusContext(DbContextOptions options) : base(options)
+    public RosePlusContext(DbContextOptions options) : base(options)
     {
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new RoseItemConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductConfiguration());
         modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new AttributeConfiguration());
+        modelBuilder.ApplyConfiguration(new AttributeValueConfiguration());
     }
 }

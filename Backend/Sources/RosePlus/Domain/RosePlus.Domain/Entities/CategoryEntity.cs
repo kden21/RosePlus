@@ -11,7 +11,28 @@ public class CategoryEntity : BaseEntity
     public string Name { get; set; }
     
     /// <summary>
-    /// Список роз данной категории.
+    /// Идентификатор родительской категории.
     /// </summary>
-    public List<RoseItemEntity> RoseItems { get; set; }
+    public int? ParentCategoryId { get; set; }
+    
+    /// <summary>
+    /// Родительская категория.
+    /// </summary>
+    public CategoryEntity? ParentCategory { get; set; }
+    
+    /// <summary>
+    /// Коллекция подкатегорий.
+    /// </summary>
+    public ICollection<CategoryEntity> ChildCategories { get; set; }
+
+    /// <summary>
+    /// Список товаров.
+    /// </summary>
+    public List<ProductEntity> Products { get; set; }
+    
+    /// <summary>
+    /// Список атрибутов.
+    /// </summary>
+    public ICollection<AttributeEntity> Attributes { get; set; }
+    
 }

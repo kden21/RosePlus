@@ -15,8 +15,13 @@ public class CategoryConfiguration : IEntityTypeConfiguration<CategoryEntity>
     
         builder.Property(category => category.Name).HasMaxLength(400);
 
-        builder.HasMany(category => category.RoseItems)
-            .WithOne(roseItem => roseItem.Category)
-            .HasForeignKey(roseItem => roseItem.CategoryId);
+        builder.HasMany(category => category.Products)
+            .WithOne(product => product.Category)
+            .HasForeignKey(product => product.CategoryId);
+
+        builder.HasOne(chc => chc.ParentCategory)
+            .WithMany(pc => pc.ChildCategories)
+            .HasForeignKey(chc => chc.ParentCategoryId);
+
     }
 }

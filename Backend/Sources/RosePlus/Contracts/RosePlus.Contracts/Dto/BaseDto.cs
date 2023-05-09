@@ -1,4 +1,4 @@
-namespace RosePlus.Contracts;
+namespace RosePlus.Contracts.Dto;
 
 /// <summary>
 /// Базовая Dto.
