@@ -8,8 +8,8 @@ namespace RosePlus.Contracts.Exceptions;
 [Serializable]
 public class EntityUpdateException : BaseException
 {
-    public EntityUpdateException(string userMessage)
-        : base(ExceptionUserMessage.EntityUpdate,userMessage)
+    public EntityUpdateException(string logMessage)
+        : base(logMessage, ExceptionUserMessage.EntityUpdate)
     {
     }
 }

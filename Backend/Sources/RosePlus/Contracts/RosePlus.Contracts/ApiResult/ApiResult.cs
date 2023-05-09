@@ -6,7 +6,6 @@ public class ApiResult<T>
 {
     public T Data { get; set; }
     public bool IsSuccess { get; set; }
-    public string Message { get; set; }
 
     public static ApiResult<T> SucessResult()
     {
@@ -16,19 +15,13 @@ public class ApiResult<T>
         };
     }
     
-    public static ApiResult<T> SuccessResult(T data, string message = null)
+    public static ApiResult<T> SuccessResult(T data)
     {
         ApiResult<T> apiResult = new ApiResult<T>();
-
-        if (!string.IsNullOrEmpty(message))
-        {
-            apiResult.Message = message;
-        }
         
         apiResult.IsSuccess = true;
         apiResult.Data = data;
 
         return apiResult;
-
     }
 }

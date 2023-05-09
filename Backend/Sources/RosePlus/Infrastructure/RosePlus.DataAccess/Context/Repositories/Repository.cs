@@ -29,7 +29,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
     {
         var entity = await DbSet.FirstOrDefaultAsync(a=> a.Id == TEntityId, cancellation);
         if(entity == null)
-            throw new EntityNotFoundException($"Не существует сущности с идентификатором '{TEntityId}'");
+            throw new EntityNotFoundException($"Не существует сущности с идентификатором {TEntityId}");
         
         return entity;
     }
@@ -78,7 +78,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
     {
         var model = await GetEntityById(TEntityId, cancellation);
         if (model == null)
-            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '{TEntityId}', т.к. она не была найдена в БД");
+            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором {TEntityId}, т.к. она не была найдена в БД");
         try
         {
             DbSet.Remove(model);
@@ -86,7 +86,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
         }
         catch (Exception exception)
         {
-            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '{TEntityId}', т.к. она не была найдена в БД");
+            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором {TEntityId}, т.к. она не была найдена в БД");
         }
     }
     
@@ -95,7 +95,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
     {
         if (predicate == null)
         {
-            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '', т.к. она не была найдена в БД");
+            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором , т.к. она не была найдена в БД");
         }
 
         try
@@ -104,7 +104,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
         }
         catch (Exception exception)
         {
-            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '', т.к. она не была найдена в БД");
+            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором , т.к. она не была найдена в БД");
         }
     }
 }
