@@ -1,27 +1,29 @@
 namespace RosePlus.Contracts.Dto;
 
 /// <summary>
-/// Данные о розе.
+/// Данные о товаре.
 /// </summary>
-public class RoseItemDto : BaseDto
+public class ProductDto : BaseDto
 {
     /// <summary>
-    /// Название розы.
+    /// Название товара.
     /// </summary>
     public string Name { get; set; } 
     
     /// <summary>
-    /// Описание розы.
+    /// Описание товара.
     /// </summary>
     public string Description { get; set; }
     
     /// <summary>
-    /// Стоимость розы.
+    /// Стоимость товара.
     /// </summary>
     public double Price { get; set; }
     
     /// <summary>
-    /// Колличество роз.
+    /// Колличество товара.
     /// </summary>
     public int Count { get; set; }
+    
+    public int CategoryId { get; set; }
 }

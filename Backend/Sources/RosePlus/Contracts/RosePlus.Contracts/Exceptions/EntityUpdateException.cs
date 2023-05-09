@@ -1,14 +1,15 @@
-namespace RosePlus.Contracts.Exceptions;
+using RosePlus.Contracts.Exceptions.ExceptionMessage;
 
+namespace RosePlus.Contracts.Exceptions;
 
 /// <summary>
 /// Исключение: Сущность не была обновлена.
 /// </summary>
 [Serializable]
-public class EntityUpdateException : Exception
+public class EntityUpdateException : BaseException
 {
-    public EntityUpdateException(string message)
-        : base(message)
+    public EntityUpdateException(string userMessage)
+        : base(ExceptionUserMessage.EntityUpdate,userMessage)
     {
     }
 }

@@ -13,12 +13,12 @@ public class CategoryEntity : BaseEntity
     /// <summary>
     /// Идентификатор родительской категории.
     /// </summary>
-    public int ParentCategoryId { get; set; }
+    public int? ParentCategoryId { get; set; }
     
     /// <summary>
     /// Родительская категория.
     /// </summary>
-    public CategoryEntity ParentCategory { get; set; }
+    public CategoryEntity? ParentCategory { get; set; }
     
     /// <summary>
     /// Коллекция подкатегорий.

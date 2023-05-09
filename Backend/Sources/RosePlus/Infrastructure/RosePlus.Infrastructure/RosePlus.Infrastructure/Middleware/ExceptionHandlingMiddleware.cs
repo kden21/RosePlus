@@ -1,6 +1,7 @@
 using System.Net.Mime;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
+using RosePlus.Contracts.ApiResult;
 using RosePlus.Contracts.Exceptions;
 
 namespace RosePlus.Infrastructure.Middleware;
@@ -23,6 +24,15 @@ public class ExceptionHandlingMiddleware
         {
             await _next(context);
         }
+        catch (BaseException exception)
+        {
+            context.Response.StatusCode = StatusCodes.Status200OK;//;.Status404NotFound;
+            await context.Response.WriteAsync( JsonSerializer.Serialize(new ApiResult<string>
+            {
+                //Message = exception.,
+                IsSuccess = false,
+            }));
+        }
         catch (Exception exception)
         {
             Console.WriteLine(exception);
@@ -31,11 +41,11 @@ public class ExceptionHandlingMiddleware
             switch (exception)
             {
                 case EntityNotFoundException:
-                    context.Response.StatusCode = StatusCodes.Status404NotFound;
-                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
+                    context.Response.StatusCode = StatusCodes.Status200OK;//;.Status404NotFound;
+                    await context.Response.WriteAsync( JsonSerializer.Serialize(new ApiResult<string>
                     {
-                        traceId = context.TraceIdentifier, 
-                        message = exception.Message
+                        Message = exception.Message,
+                        IsSuccess = false,
                     }));
                     break;
                 case EntityUpdateException:

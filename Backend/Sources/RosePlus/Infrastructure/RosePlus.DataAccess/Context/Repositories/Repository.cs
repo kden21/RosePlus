@@ -38,7 +38,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
     public async Task<int> AddEntity(TEntity model, CancellationToken cancellation)
     {
         if (model == null)
-            throw new EntityNotFoundException($"Модель представления не может быть null");
+            throw new EntityCreateException($"Модель представления не может быть null");
         
         model.CreateDate = DateTime.UtcNow;
         model.ModifyDate = model.CreateDate;
@@ -52,7 +52,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
         }
         catch(Exception exception)
         {
-            throw new EntityCreateException("Не удалось добавить сущность в БД");
+            throw new EntityCreateException($"Не удалось добавить сущность в БД: {exception.Message}");
         }
     }
 
@@ -60,7 +60,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
     public async Task UpdateEntity(TEntity model, CancellationToken cancellation)
     {
         if (model == null)
-            throw new EntityNotFoundException("Модель представления не может быть null");
+            throw new EntityUpdateException("Модель представления не может быть null");
         try
         {
             model.ModifyDate = DateTime.UtcNow;
@@ -69,7 +69,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
         }
         catch (Exception exception)
         {
-            throw new EntityUpdateException("Не удалось обновить сущность");
+            throw new EntityUpdateException($"Не удалось обновить сущность: {exception.Message}");
         }
     }
 
@@ -79,9 +79,15 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
         var model = await GetEntityById(TEntityId, cancellation);
         if (model == null)
             throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '{TEntityId}', т.к. она не была найдена в БД");
-        
-        DbSet.Remove(model);
-        await DbContext.SaveChangesAsync(cancellation);
+        try
+        {
+            DbSet.Remove(model);
+            await DbContext.SaveChangesAsync(cancellation);
+        }
+        catch (Exception exception)
+        {
+            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '{TEntityId}', т.к. она не была найдена в БД");
+        }
     }
     
     /// <inheritdoc />
@@ -89,9 +95,16 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
     {
         if (predicate == null)
         {
-            throw new ArgumentException(null, nameof(predicate));
+            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '', т.к. она не была найдена в БД");
         }
 
-        return DbSet.Where(predicate);
+        try
+        {
+            return DbSet.Where(predicate);
+        }
+        catch (Exception exception)
+        {
+            throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '', т.к. она не была найдена в БД");
+        }
     }
 }
