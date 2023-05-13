@@ -30,6 +30,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppServices", "AppServices"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosePlus.AppServices", "Sources\RosePlus\AppServices\RosePlus.AppServices\RosePlus.AppServices\RosePlus.AppServices.csproj", "{8D838FB4-790A-4B47-B1CD-F407A312F51C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D0BFDB21-BE1C-4C4E-9A9B-AA17412C4A47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosePlus.Common", "Sources\RosePlus\Common\RosePlus.Common\RosePlus.Common.csproj", "{13D08793-03F8-4238-915B-347EFAF8AF8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +54,8 @@ Global
 		{133EFB4A-F3AE-4888-AD73-A53E3DC4F093} = {22459F8D-7E85-404D-88DB-919B101D3BF5}
 		{B6477535-23D3-4759-8A8A-A62E172A0B89} = {112B349A-935B-485F-89F9-3F382D21BDDE}
 		{8D838FB4-790A-4B47-B1CD-F407A312F51C} = {B6477535-23D3-4759-8A8A-A62E172A0B89}
+		{D0BFDB21-BE1C-4C4E-9A9B-AA17412C4A47} = {112B349A-935B-485F-89F9-3F382D21BDDE}
+		{13D08793-03F8-4238-915B-347EFAF8AF8D} = {D0BFDB21-BE1C-4C4E-9A9B-AA17412C4A47}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7E2E5D4D-24E4-45B7-B59C-C8941E9EC53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -84,5 +90,9 @@ Global
 		{8D838FB4-790A-4B47-B1CD-F407A312F51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D838FB4-790A-4B47-B1CD-F407A312F51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D838FB4-790A-4B47-B1CD-F407A312F51C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13D08793-03F8-4238-915B-347EFAF8AF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13D08793-03F8-4238-915B-347EFAF8AF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13D08793-03F8-4238-915B-347EFAF8AF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13D08793-03F8-4238-915B-347EFAF8AF8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Common\RosePlus.Common\RosePlus.Common.csproj" />
       <ProjectReference Include="..\RosePlus.DataAccess\RosePlus.DataAccess.csproj" />
     </ItemGroup>
 

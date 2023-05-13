@@ -8,6 +8,7 @@ using RosePlus.DataAccess.Configurations;
 using RosePlus.DataAccess.Configurations.Interfaces;
 using RosePlus.DataAccess.Context;
 using RosePlus.DataAccess.Context.Repositories;
+using RosePlus.Migrations;
 
 namespace RosePlus.Registrar;
 
@@ -21,7 +22,7 @@ public static class RosePlusRegistrar
             .AddAppServices(configuration);
         return builder;
     }
-    public static IServiceCollection AddDataAccessServices(this IServiceCollection services)
+    private static IServiceCollection AddDataAccessServices(this IServiceCollection services)
     {
         services.AddDbContext<RosePlusContext>(
             (Action<IServiceProvider, DbContextOptionsBuilder>) 

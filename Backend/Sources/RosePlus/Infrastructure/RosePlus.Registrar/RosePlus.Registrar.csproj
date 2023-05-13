@@ -9,10 +9,12 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\RosePlus.DataAccess\RosePlus.DataAccess.csproj" />
+      <ProjectReference Include="..\RosePlus.Migrations\RosePlus.Migrations.csproj" />
     </ItemGroup>
 
     <ItemGroup>
