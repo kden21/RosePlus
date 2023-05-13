@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 COPY Frontend/package.json Frontend/package-lock.json .
 RUN npm install
 COPY Frontend/. .
-RUN npm run build
+RUN npm run build_prod
 
 #STAGE 2
 FROM nginx:1.17.1-alpine
