@@ -5,7 +5,7 @@ namespace RosePlus.AppServices.Mappers.Product;
 
 public static class ProductDtoMapper
 {
-    public static ProductDto FillDto(this ProductEntity productEntity)
+    public static ProductDto ProductMappDto(this ProductEntity productEntity)
     {
         return new ProductDto
         {
@@ -15,7 +15,8 @@ public static class ProductDtoMapper
             Name = productEntity.Name,
             Description = productEntity.Description,
             Price = productEntity.Price,
-            Count = productEntity.Count
+            Count = productEntity.Count,
+            CategoryId = productEntity.CategoryId
         };
     }
 }
