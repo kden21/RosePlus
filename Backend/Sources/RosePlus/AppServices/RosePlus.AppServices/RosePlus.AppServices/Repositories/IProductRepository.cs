@@ -1,4 +1,4 @@
-using RosePlus.Contracts.Requests;
+using RosePlus.Contracts.Filters;
 using RosePlus.Domain.Entities;
 
 namespace RosePlus.AppServices.Repositories;
@@ -19,10 +19,10 @@ public interface IProductRepository
     /// <summary>
     /// Метод для получения коллекции товаров по фильтру.
     /// </summary>
-    /// <param name="productRequest">Запрос на получения списка товаров.</param>
+    /// <param name="productFilter">Параметры фильтрации.</param>
     /// <param name="cancellationToken">Токен отмены действия.</param>
     /// <returns>Коллекция сущностей товаров.</returns>
-    Task<List<ProductEntity>> GetProducts(ProductRequest productRequest,CancellationToken cancellationToken);
+    Task<List<ProductEntity>> GetProducts(ProductFilter productFilter, CancellationToken cancellationToken);
 
     /// <summary>
     /// Метод добавления товара.

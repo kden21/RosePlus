@@ -1,10 +1,10 @@
 using RosePlus.AppServices.Mappers.Product;
 using RosePlus.AppServices.Repositories;
 using RosePlus.Contracts.Dto;
-using RosePlus.Contracts.Requests;
+using RosePlus.Contracts.Filters;
 using RosePlus.Domain.Entities;
 
-namespace RosePlus.AppServices.Services;
+namespace RosePlus.AppServices.Services.Product;
 
 /// <inheritdoc />
 public class ProductService : IProductService
@@ -22,17 +22,22 @@ public class ProductService : IProductService
     /// <inheritdoc />
     public async Task<ProductDto> GetProductByIdAsync(int productId, CancellationToken cancellationToken)
     {
-        return (await _productRepository.GetProductById(productId, cancellationToken)).ProductMappDto();
+        ProductEntity productEntity = await _productRepository.GetProductById(productId, cancellationToken);
+        ProductDto productDto = new ProductDto();
+        productDto.FillProductDto(productEntity);
+        return productDto;
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<ProductDto>> GetProductsAsync(ProductRequest productRequest, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ProductDto>> GetProductsAsync(ProductFilter productFilter, CancellationToken cancellationToken)
     {
-        var productEntities = await _productRepository.GetProducts(productRequest, cancellationToken);
+        var productEntities = await _productRepository.GetProducts(productFilter, cancellationToken);
         List<ProductDto> productDtos = new List<ProductDto>();
         foreach (ProductEntity productEntity in productEntities)
         {
-            productDtos.Add(productEntity.ProductMappDto());
+            ProductDto productDto = new ProductDto();
+            productDto.FillProductDto(productEntity);
+            productDtos.Add(productDto);
         }
 
         return productDtos;
@@ -41,7 +46,9 @@ public class ProductService : IProductService
     /// <inheritdoc />
     public async Task<int> AddProductAsync(ProductDto productDto, CancellationToken cancellationToken)
     {
-        return await _productRepository.AddProduct(productDto.MapProductEntity(), cancellationToken);
+        ProductEntity productEntity = new ProductEntity(); 
+        productEntity.FillProductEntity(productDto);
+        return await _productRepository.AddProduct(productEntity, cancellationToken);
     }
 
     /// <inheritdoc />
@@ -53,6 +60,8 @@ public class ProductService : IProductService
     /// <inheritdoc />
     public async Task UpdateProductAsync(ProductDto productDto, CancellationToken cancellationToken)
     {
-        await _productRepository.UpdateProduct(productDto.MapProductEntity(), cancellationToken);
+        ProductEntity productEntity = await _productRepository.GetProductById(productDto.Id, cancellationToken);
+        productEntity.FillProductEntity(productDto);
+        await _productRepository.UpdateProduct(productEntity, cancellationToken);
     }
 }

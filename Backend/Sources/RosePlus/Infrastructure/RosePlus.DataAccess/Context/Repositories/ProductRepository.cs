@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using RosePlus.AppServices.Repositories;
-using RosePlus.Contracts.Requests;
 using RosePlus.Domain.Entities;
 
 namespace RosePlus.DataAccess.Context.Repositories;

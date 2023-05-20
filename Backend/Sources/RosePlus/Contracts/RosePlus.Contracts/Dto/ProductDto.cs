@@ -25,5 +25,13 @@ public class ProductDto : BaseDto
     /// </summary>
     public int Count { get; set; }
     
+    /// <summary>
+    /// Идентификатор категории товара.
+    /// </summary>
     public int CategoryId { get; set; }
+    
+    /// <summary>
+    /// Статус товара.
+    /// </summary>
+    public int Status { get; set; }
 }

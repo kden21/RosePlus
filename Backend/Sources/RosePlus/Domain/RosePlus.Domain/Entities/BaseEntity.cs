@@ -11,7 +11,7 @@ public class BaseEntity
     public int Id { get; set; }
     
     /// <summary>
-    /// Дата содания сущности.
+    /// Дата создания сущности.
     /// </summary>
     public DateTime CreateDate {get; set; }
     

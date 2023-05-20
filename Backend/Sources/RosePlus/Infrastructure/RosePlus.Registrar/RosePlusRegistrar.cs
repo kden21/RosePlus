@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RosePlus.AppServices.Repositories;
-using RosePlus.AppServices.Services;
+using RosePlus.AppServices.Services.Product;
 using RosePlus.DataAccess.Configurations;
 using RosePlus.DataAccess.Configurations.Interfaces;
 using RosePlus.DataAccess.Context;
