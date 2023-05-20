@@ -13,10 +13,10 @@ public class BaseDto
     /// <summary>
     /// Дата создания.
     /// </summary>
-    public string CreateDate { get; set; } 
+    public string? CreateDate { get; set; } 
     
     /// <summary>
     /// Дата последнего изменения.
     /// </summary>
-    public string ModifyDate { get; set; }
+    public string? ModifyDate { get; set; }
 }
