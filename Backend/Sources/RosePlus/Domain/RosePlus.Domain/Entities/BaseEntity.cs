@@ -16,7 +16,7 @@ public class BaseEntity
     public DateTime CreateDate {get; set; }
     
     /// <summary>
-    /// Помледняя дата модификции сущности.
+    /// Последняя дата модификции сущности.
     /// </summary>
     public DateTime ModifyDate { get; set; }
 }

@@ -24,8 +24,5 @@ public static class ProductEntityMapper
         productEntity.Price = productDto.Price;
         productEntity.CategoryId = productDto.CategoryId;
         productEntity.Status = (StatusProduct)productDto.Status;
-        productEntity.CreateDate = productEntity.CreateDate == DateTime.MinValue
-            ? (string.IsNullOrEmpty(productDto.CreateDate) ? DateTime.UtcNow : productDto.CreateDate!.ToISOString()):productEntity.CreateDate;
-        productEntity.ModifyDate = string.IsNullOrEmpty(productDto.ModifyDate) ? DateTime.UtcNow : productDto.ModifyDate!.ToISOString();
     }
 }

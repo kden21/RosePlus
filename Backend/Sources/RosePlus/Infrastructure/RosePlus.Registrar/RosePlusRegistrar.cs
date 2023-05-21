@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RosePlus.AppServices.Repositories;
+using RosePlus.AppServices.Services.Category;
 using RosePlus.AppServices.Services.Product;
 using RosePlus.DataAccess.Configurations;
 using RosePlus.DataAccess.Configurations.Interfaces;
@@ -32,9 +33,10 @@ public static class RosePlusRegistrar
 
         services.AddScoped(sp => (DbContext) sp.GetRequiredService<RosePlusContext>());
 
-        services.AddScoped( typeof(IRepository<>), typeof(Repository<>));
-        services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped<ILoggerDbRepository, LoggerRepository>();
+        services.AddScoped( typeof(IRepository<>), typeof(Repository<>))
+            .AddScoped<IProductRepository, ProductRepository>()
+            .AddScoped<ILoggerDbRepository, LoggerRepository>()
+            .AddScoped<ICategoryRepository, CategoryRepository>();
         
         return services;
     }
@@ -42,7 +44,7 @@ public static class RosePlusRegistrar
     public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IProductService, ProductService>();
-        //services.
+        services.AddScoped<ICategoryService, CategoryService>();
         
         return services;
     }

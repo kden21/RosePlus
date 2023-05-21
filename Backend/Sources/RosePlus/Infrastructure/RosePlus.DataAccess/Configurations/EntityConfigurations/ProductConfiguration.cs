@@ -15,13 +15,15 @@ public class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
         
         builder.Property(product => product.Name).HasMaxLength(100);
         builder.Property(product => product.Description).HasMaxLength(1000);
+        builder.Property(product => product.CreateDate).HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+        builder.Property(product => product.ModifyDate).HasDefaultValueSql("current_timestamp at time zone 'UTC'");
 
         builder.HasOne(product => product.Category)
             .WithMany(category => category.Products)
             .HasForeignKey(product => product.CategoryId);
 
         builder.HasMany(p => p.AttributeValues)
-            .WithMany(av => av.Products)
-            .UsingEntity(b => b.ToTable("Product_AttributeValue"));
+            .WithOne(av => av.Product)
+            .HasForeignKey(p => p.Id);
     }
 }

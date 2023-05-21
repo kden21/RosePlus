@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RosePlus.AppServices.Repositories;
+using RosePlus.Contracts.Filters;
 using RosePlus.Domain.Entities;
 
 namespace RosePlus.DataAccess.Context.Repositories;
@@ -8,7 +9,7 @@ namespace RosePlus.DataAccess.Context.Repositories;
 public class ProductRepository : IProductRepository
 {
     /// <summary>
-    /// Репозитеорий для работы с товаром.
+    /// Репозитеорий для работы с товаром <see cref="ProductEntity"/>>.
     /// </summary>
     private readonly IRepository<ProductEntity> _repository;
 
@@ -24,9 +25,9 @@ public class ProductRepository : IProductRepository
     }
 
     /// <inheritdoc />
-    public Task<List<ProductEntity>> GetProducts(ProductRequest productRequest, CancellationToken cancellationToken)
+    public Task<List<ProductEntity>> GetProducts(ProductFilter productFilter, CancellationToken cancellationToken)
     {
-        return _repository.Where(x => x.CategoryId == productRequest.CategoryId).ToListAsync(cancellationToken);
+        return _repository.Where(x => x.CategoryId == productFilter.CategoryId).ToListAsync(cancellationToken);
     }
     
     /// <inheritdoc />

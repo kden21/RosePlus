@@ -28,7 +28,7 @@ public interface IProductRepository
     /// Метод добавления товара.
     /// </summary>
     /// <param name="productEntity">Сущность товара.</param>
-    /// <param name="cancellationToken"Токен отмены действия.></param>
+    /// <param name="cancellationToken">Токен отмены действия.</param>
     /// <returns>Иденификатор товара.</returns>
     Task<int> AddProduct(ProductEntity productEntity, CancellationToken cancellationToken);
 
