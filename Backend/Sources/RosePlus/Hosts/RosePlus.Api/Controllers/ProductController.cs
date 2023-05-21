@@ -1,9 +1,8 @@
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using RosePlus.AppServices.Services;
+using RosePlus.AppServices.Services.Product;
 using RosePlus.Contracts.ApiResult;
 using RosePlus.Contracts.Dto;
-using RosePlus.Contracts.Requests;
+using RosePlus.Contracts.Filters;
 
 namespace RosePlus.Api.Controllers;
 
@@ -11,7 +10,7 @@ namespace RosePlus.Api.Controllers;
 /// Работа с товаром.
 /// </summary>
 [ApiController]
-[Route("v1/[controller]")]
+[Route("v1/[controller]/[action]")]
 public class ProductController : BaseController
 {
     private readonly ILogger<ProductController> _logger;
@@ -45,9 +44,9 @@ public class ProductController : BaseController
     /// <returns>Результат.</returns>
     [HttpGet(Name = "GetProducts")]
     [ProducesResponseType(typeof(IReadOnlyCollection<ProductDto>), statusCode: 200)]
-    public async Task<IActionResult> GetProductsAsync([FromQuery] ProductRequest productRequest,CancellationToken cancellation)
+    public async Task<IActionResult> GetProductsAsync([FromQuery] ProductFilter productFilter, CancellationToken cancellation)
     {
-        return Success(await _productService.GetProductsAsync(productRequest, cancellation));
+        return Success(await _productService.GetProductsAsync(productFilter, cancellation));
     }
     
     [HttpPut(Name = "UpdateProduct")]

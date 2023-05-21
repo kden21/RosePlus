@@ -1,7 +1,7 @@
 using RosePlus.Contracts.Dto;
-using RosePlus.Contracts.Requests;
+using RosePlus.Contracts.Filters;
 
-namespace RosePlus.AppServices.Services;
+namespace RosePlus.AppServices.Services.Product;
 
 /// <summary>
 /// Сервис работы с товарами.
@@ -19,10 +19,10 @@ public interface IProductService
     /// <summary>
     /// Метод для получения коллекции товаров по фильтру.
     /// </summary>
-    /// <param name="productRequest">Запрос на получение списка товаров.</param>
-    /// <param name="cancellationToken">ТОкен отмены действия.</param>
+    /// <param name="productFilter">Параметр фильтрации.</param>
+    /// <param name="cancellationToken">Токен отмены действия.</param>
     /// <returns>Коллекция товаров.</returns>
-    Task<IEnumerable<ProductDto>> GetProductsAsync(ProductRequest productRequest, CancellationToken cancellationToken);
+    Task<IEnumerable<ProductDto>> GetProductsAsync(ProductFilter productFilter, CancellationToken cancellationToken);
     
     /// <summary>
     /// Метод добавления товара.

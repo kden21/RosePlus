@@ -15,5 +15,8 @@ public class AttributeEntity : BaseEntity
     /// </summary>
     public ICollection<CategoryEntity> Categories { get; set; }
     
+    /// <summary>
+    /// Коллекция значений атрибута.
+    /// </summary>
     public ICollection<AttributeValueEntity> AttributeValues { get; set; }
 }

@@ -11,12 +11,12 @@ public class BaseEntity
     public int Id { get; set; }
     
     /// <summary>
-    /// Дата содания сущности.
+    /// Дата создания сущности.
     /// </summary>
     public DateTime CreateDate {get; set; }
     
     /// <summary>
-    /// Помледняя дата модификции сущности.
+    /// Последняя дата модификции сущности.
     /// </summary>
     public DateTime ModifyDate { get; set; }
 }

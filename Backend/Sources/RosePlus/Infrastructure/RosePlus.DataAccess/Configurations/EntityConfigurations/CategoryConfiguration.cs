@@ -14,6 +14,8 @@ public class CategoryConfiguration : IEntityTypeConfiguration<CategoryEntity>
         builder.Property(category => category.Id).ValueGeneratedOnAdd();
     
         builder.Property(category => category.Name).HasMaxLength(400);
+        builder.Property(category => category.CreateDate).HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+        builder.Property(category => category.ModifyDate).HasDefaultValueSql("current_timestamp at time zone 'UTC'");
 
         builder.HasMany(category => category.Products)
             .WithOne(product => product.Category)
