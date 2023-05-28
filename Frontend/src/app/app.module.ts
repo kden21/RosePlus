@@ -13,6 +13,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
+import {NzGridModule} from "ng-zorro-antd/grid";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzTypographyModule} from "ng-zorro-antd/typography";
 
 registerLocaleData(ru);
 
@@ -20,16 +24,20 @@ registerLocaleData(ru);
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        IconsProviderModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzBreadCrumbModule,
+        NzGridModule,
+        NzButtonModule,
+        NzTypographyModule
+    ],
   providers: [
     { provide: NZ_I18N, useValue: ru_RU }
   ],
