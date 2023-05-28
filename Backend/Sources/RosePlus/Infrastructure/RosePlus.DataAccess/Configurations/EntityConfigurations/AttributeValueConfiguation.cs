@@ -8,8 +8,7 @@ public class AttributeValueConfiguration : IEntityTypeConfiguration<AttributeVal
 {
     public void Configure(EntityTypeBuilder<AttributeValueEntity> builder)
     {
-        builder.ToTable("AttributeValues")
-            .HasIndex(av => av.Id).IsUnique();
+        builder.ToTable("AttributeValues");
     
         builder.HasKey(av => av.Id);
         builder.Property(av => av.Id).ValueGeneratedOnAdd();
