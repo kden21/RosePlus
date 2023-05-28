@@ -24,6 +24,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
 
         builder.HasMany(p => p.AttributeValues)
             .WithOne(av => av.Product)
-            .HasForeignKey(p => p.Id);
+            .HasForeignKey(p => p.ProductId);
     }
 }

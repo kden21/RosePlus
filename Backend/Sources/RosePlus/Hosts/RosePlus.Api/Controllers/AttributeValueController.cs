@@ -5,6 +5,11 @@ using RosePlus.Contracts.Dto;
 
 namespace RosePlus.Api.Controllers;
 
+/// <summary>
+/// Работа с значением атрибута.
+/// </summary>
+[ApiController]
+[Route("v1/[controller]/[action]")]
 public class AttributeValueController : BaseController
 {
     private readonly IAttributeValueService _attributeValueService;

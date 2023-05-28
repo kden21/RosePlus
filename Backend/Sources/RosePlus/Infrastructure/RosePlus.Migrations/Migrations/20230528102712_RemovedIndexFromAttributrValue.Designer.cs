@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RosePlus.Migrations;
@@ -11,9 +12,11 @@ using RosePlus.Migrations;
 namespace RosePlus.Migrations.Migrations
 {
     [DbContext(typeof(MigrationsDbContext))]
-    partial class MigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230528102712_RemovedIndexFromAttributrValue")]
+    partial class RemovedIndexFromAttributrValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,8 +74,6 @@ namespace RosePlus.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
                     b.Property<int>("AttributeId")
                         .HasColumnType("integer");
 
@@ -97,8 +98,6 @@ namespace RosePlus.Migrations.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AttributeId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("AttributeValues", (string)null);
                 });
@@ -208,7 +207,7 @@ namespace RosePlus.Migrations.Migrations
 
                     b.HasOne("RosePlus.Domain.Entities.ProductEntity", "Product")
                         .WithMany("AttributeValues")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
