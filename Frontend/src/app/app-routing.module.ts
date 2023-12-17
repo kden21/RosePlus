@@ -9,9 +9,9 @@ import {PaymentPageComponent} from "./pages/payment-page/payment-page.component"
 
 const routes: Routes = [
   //{ path: '', pathMatch: 'full', redirectTo: '' },
-  { path: '', component: IndexPageComponent, data: { customBreadcrumb: 'Главная'}},
-  { path: 'policy', component: PolicyPageComponent, data: { customBreadcrumb: 'Gdf'}},
-  { path: 'policy/agree', component: AgreePageComponent, data: { customBreadcrumb: 'Пользовательское соглашение'}},
+  { path: '', component: IndexPageComponent},
+  { path: 'policy', component: PolicyPageComponent},
+  { path: 'agree', component: AgreePageComponent},
   { path: 'about', component: AboutPageComponent },
   { path: 'payment', component: PaymentPageComponent },
   { path: 'delivery', component: DeliveryPageComponent },

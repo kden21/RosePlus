@@ -1,6 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {GlobalVariable} from "../../global";
 import {SearchComponent} from "../search/search.component";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-header-mobile',
@@ -8,6 +8,6 @@ import {SearchComponent} from "../search/search.component";
   styleUrls: ['./header-mobile.component.less']
 })
 export class HeaderMobileComponent {
-  globalVariable = GlobalVariable;
+  environment = environment;
   @ViewChild('search') search: SearchComponent | undefined;
 }

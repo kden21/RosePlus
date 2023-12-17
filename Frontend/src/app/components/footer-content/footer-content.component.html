@@ -7,10 +7,10 @@
               <a routerLink="/about" class="page-title">О нас</a>
           </span>
           <span nz-typography>
-            <a routerLink="/payment" class="page-title">Доставка</a>
+            <a routerLink="/payment" class="page-title">Оплата</a>
           </span>
           <span nz-typography>
-            <a routerLink="/delivery" class="page-title">Оплата</a>
+            <a routerLink="/delivery" class="page-title">Доставка</a>
           </span>
         </div>
         <nz-divider></nz-divider>
@@ -19,13 +19,13 @@
         <div [ngClass]="{'contact-row': windowService.windowSize <= windowSize.xs}">
           <div class="title">Телефон</div>
           <span nz-typography>
-            <a href="tel:{{globalVariable.COMPANY_PHONE}}"><u class="contact-text">{{globalVariable.COMPANY_PHONE}}</u></a>
+            <a href="tel:{{environment.data.company.phone}}"><u class="contact-text">{{environment.data.company.phone}}</u></a>
           </span>
         </div>
         <div [ngClass]="{'contact-row': windowService.windowSize <= windowSize.xs}">
           <div class="title">Почта</div>
           <span nz-typography>
-            <a href="mailto:{{globalVariable.COMPANY_EMAIL}}"><u class="contact-text">{{globalVariable.COMPANY_EMAIL}}</u></a>
+            <a href="mailto:{{environment.data.company.email}}"><u class="contact-text">{{environment.data.company.email}}</u></a>
           </span>
         </div>
         <div>

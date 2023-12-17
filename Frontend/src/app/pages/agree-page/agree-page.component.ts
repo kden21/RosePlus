@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {GlobalVariable} from "../../global";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-agree-page',
@@ -7,5 +7,5 @@ import {GlobalVariable} from "../../global";
   styleUrls: ['./agree-page.component.less']
 })
 export class AgreePageComponent {
-  globalVariable = GlobalVariable;
+  environment = environment;
 }

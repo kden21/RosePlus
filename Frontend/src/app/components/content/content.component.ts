@@ -1,6 +1,5 @@
-import {Component, NgZone, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {NzCarouselComponent} from "ng-zorro-antd/carousel";
-import {fromEvent} from "rxjs";
 import {WindowService} from "../../services/WindowService";
 
 @Component({

@@ -1,7 +1,9 @@
 <div class="header-mobile">
   <div class="inner-header-mobile">
     <div class="row">
-      <img *ngIf="!search.searchFocused" src='/assets/logo.svg' style="height: 35px; margin-right: 20px">
+      <a routerLink="/">
+        <img *ngIf="!search.searchFocused" src='/assets/logo.svg' style="height: 35px; margin-right: 20px">
+      </a>
       <button *ngIf="search.searchFocused" nz-button nzType="link" class="back-btn" (click)="search.searchFocused = false">
         <span nz-icon nzType="arrow-left" class="m-icon"></span>
       </button>

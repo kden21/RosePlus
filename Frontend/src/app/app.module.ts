@@ -36,6 +36,7 @@ import { AgreePageComponent } from './pages/agree-page/agree-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
 import { DeliveryPageComponent } from './pages/delivery-page/delivery-page.component';
+import {BreadcrumbModule} from "xng-breadcrumb";
 
 registerLocaleData(ru);
 
@@ -73,7 +74,8 @@ registerLocaleData(ru);
     NzInputModule,
     NzBadgeModule,
     NzCarouselModule,
-    NzDividerModule
+    NzDividerModule,
+    BreadcrumbModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: ru_RU },

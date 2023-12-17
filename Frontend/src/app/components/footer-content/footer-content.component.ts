@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {WindowSize} from "../../enums/WindowSize";
 import {WindowService} from "../../services/WindowService";
-import {GlobalVariable} from "../../global";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-footer-content',
@@ -9,7 +9,7 @@ import {GlobalVariable} from "../../global";
   styleUrls: ['./footer-content.component.less']
 })
 export class FooterContentComponent {
-  globalVariable = GlobalVariable;
+  environment = environment;
   windowSize = WindowSize;
   currentYear = new Date().getFullYear();
 
