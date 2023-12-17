@@ -1,0 +1,43 @@
+@import "../styles.less";
+
+:host {
+  display: flex;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.up-button {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  background-color: white;
+  opacity: 0.88;
+  box-shadow: 0 0 10px #00000040;
+}
+
+.layout {
+  min-height: 100vh;
+}
+
+.bottom-fixed {
+  position:fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+.top-fixed {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+.header {
+  background-color: white;
+  z-index: 1000;
+}

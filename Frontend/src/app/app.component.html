@@ -1,44 +1,31 @@
-<nz-layout class="app-layout">
-  <nz-header nz-row style="height: 200px">
-    <div nz-col nzSpan="18" nzOffset="3">
-      <div nz-row nzJustify="start" nzAlign="middle">
-        <div style="height: 50px; margin-right: 15px">
-          <svg id="_Слой_1" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 399.4 336.17" width="50px" height="50px">
-            <defs>
-              <style>
-                .cls-1 {
-                  fill: #fdc1a0;
-                }
-              </style>
-            </defs>
-            <g id="asfasf" data-name="asdsa">
-              <path class="cls-1" d="M240.41,.12c-23.51,2.1-46.93,18.93-55,27,38.6,4.91,78.25,11.48,96,51,35.32,78.65-63.22,136-123,106,67.56,49.55,158.31,17.95,181-35C367.58,73.95,317.25-3.39,240.41,.12ZM51.41,137.12c8.14-58.56,47.83-99.13,113-107-61.53-54.17-203.89,.03-154,128,13.07-8.15,16.38-14.93,41-21Zm218,94c-19.66-.33-35.67,1-59-1-42-4.67-97.67-29.9-93-99,11.33-64.21,118.89-33.77,110,30,68.22-32.88,38.11-118.22-55-110-49.11,4.89-106.3,38.49-100,131,5.56,41.14,9.56,61.11,12,62,2-2.67,5.46-27.89,24-39,46.22,44.22,108.93,52.68,161,26Zm97-121c-2.22,44.48-20.3,86.03-43,107,3.92,13.6,3.39,30.68,2,46,69.94-5.86,103.59-103.35,41-153Zm-225,19c-.89,23.77,36.22,42.89,62,40,8.89-32.22-8.59-46.51-40-50-13.56-.44-21.56,5.11-22,10ZM15.41,189.12c-27.36,44.99,8.34,98.72,57,98-15.84-60.04-17.3-45.19-23.82-125-15.33,8.43-25.8,14.87-33.18,27Zm96,51c-40.22,122.97,203.31,134.12,191-3-60.19,48.06-140.94,31.81-191,3Z"/>
-            </g>
-          </svg>
-        </div>
-        <h4 nz-typography style="margin-bottom: 0">РозаПлюс</h4>
+<nz-layout class="layout">
+  <div class="header">
+    <div *ngIf="windowService.windowSize >= windowSize.lg">
+      <div #header_top>
+        <app-header-top></app-header-top>
       </div>
-      <ul nz-menu nzMode="horizontal" [nzInlineCollapsed]="false">
-        <li nz-menu-item>nav 1</li>
-        <li nz-menu-item>nav 2</li>
-        <li nz-menu-item>nav 3</li>
-        <li nz-menu-item>nav 1</li>
-        <li nz-menu-item>nav 2</li>
-        <li nz-menu-item>nav 3</li>
-        <li nz-menu-item>nav 1</li>
-        <li nz-menu-item>nav 2</li>
-        <li nz-menu-item>nav 3</li>
-      </ul>
+      <div #header_search [ngClass]="{'top-fixed': scrollY > header_top!.offsetHeight}">
+        <app-header-search></app-header-search>
+      </div>
     </div>
-  </nz-header>
+    <div *ngIf="windowService.windowSize < windowSize.lg">
+      <app-header-mobile></app-header-mobile>
+    </div>
+  </div>
   <nz-content>
-    <button nz-button nzType="primary">Primary Button</button>
-    <nz-breadcrumb>
-      <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-      <nz-breadcrumb-item>List</nz-breadcrumb-item>
-      <nz-breadcrumb-item>App</nz-breadcrumb-item>
-    </nz-breadcrumb>
-    <div>Content</div>
+    <app-content></app-content>
   </nz-content>
-  <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+  <nz-back-top *ngIf="windowService.windowSize >= windowSize.lg" [nzTemplate]="tpl" [nzVisibilityHeight]="50">
+    <ng-template #tpl>
+      <div class="up-button">
+        <span nz-icon nzType="arrow-up" nzTheme="outline" class="m-icon"></span>
+      </div>
+    </ng-template>
+  </nz-back-top>
+  <nz-footer>
+    <app-footer-content></app-footer-content>
+    <div class="bottom-fixed" *ngIf="windowService.windowSize < windowSize.lg">
+      <app-bottom-menu></app-bottom-menu>
+    </div>
+  </nz-footer>
 </nz-layout>

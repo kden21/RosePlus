@@ -1,0 +1,53 @@
+<div class="footer-container">
+  <div class="inner-footer-container">
+    <div class="footer-content">
+      <div >
+        <div class="flex-row-pages">
+          <span nz-typography>
+              <a routerLink="/about" class="page-title">О нас</a>
+          </span>
+          <span nz-typography>
+            <a routerLink="/payment" class="page-title">Доставка</a>
+          </span>
+          <span nz-typography>
+            <a routerLink="/delivery" class="page-title">Оплата</a>
+          </span>
+        </div>
+        <nz-divider></nz-divider>
+      </div>
+      <div [ngClass]="windowService.windowSize > windowSize.xs ? 'flex-row' : 'flex-column'">
+        <div [ngClass]="{'contact-row': windowService.windowSize <= windowSize.xs}">
+          <div class="title">Телефон</div>
+          <span nz-typography>
+            <a href="tel:{{globalVariable.COMPANY_PHONE}}"><u class="contact-text">{{globalVariable.COMPANY_PHONE}}</u></a>
+          </span>
+        </div>
+        <div [ngClass]="{'contact-row': windowService.windowSize <= windowSize.xs}">
+          <div class="title">Почта</div>
+          <span nz-typography>
+            <a href="mailto:{{globalVariable.COMPANY_EMAIL}}"><u class="contact-text">{{globalVariable.COMPANY_EMAIL}}</u></a>
+          </span>
+        </div>
+        <div>
+          <button nz-button nzType="primary" nzSize="large" class="rounded">
+            <span nz-icon nzType="mail" nzTheme="outline"></span>
+            Написать нам
+          </button>
+        </div>
+      </div>
+      <nz-divider style="color: white"></nz-divider>
+      <div class="flex-row-bottom">
+        <div class="flex-row-additional">
+          <span nz-typography>
+            <a routerLink="/policy"><u class="text-color-7">Политика обработки персональных данных</u></a>
+          </span>
+          <span nz-typography>
+            <a routerLink="/agree"><u class="text-color-7">Пользовательское соглашение</u></a>
+          </span>
+        </div>
+        <span nz-typography class="text-color-7">© 2014–{{currentYear}}. РозаПлюс. Доставка по всей России. Все права защищены.</span>
+      </div>
+    </div>
+    <div *ngIf="windowService.windowSize < windowSize.lg" class="bottom-menu-spacer"></div>
+  </div>
+</div>

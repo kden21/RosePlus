@@ -1,0 +1,20 @@
+<div class="header-top">
+  <div class="inner-header-top">
+    <div class="link-row">
+      <a nz-typography href="" target="_self" class="text-color-4 icon-text">
+        <span nz-icon nzType="phone" nzTheme="outline"></span>
+        <span>{{globalVariable.COMPANY_PHONE}}</span>
+      </a>
+      <a nz-typography href="" target="_self" class="text-color-4 icon-text">
+        <span nz-icon nzType="clock-circle" nzTheme="outline"></span>
+        <span>Пн-Пт: 09:00-18:00</span>
+      </a>
+    </div>
+    <div *ngIf="windowService.windowSize >= windowSize.md" class="link-row">
+      <a nz-typography href="" target="_self" class="text-color-4">О нас</a>
+      <a nz-typography href="" target="_blank" class="text-color-4">Оплата</a>
+      <a nz-typography href="" target="_blank" class="text-color-4">Доставка</a>
+    </div>
+  </div>
+</div>
+<div></div>
