@@ -1,0 +1,19 @@
+<div id="search" [class]="{'search-focused' : searchFocused && searchItems.length > 0}">
+  <nz-input-group nzSearch [nzSuffix]="suffixIconButton" [class]="searchFocused && searchItems.length > 0 ? 'main-search-focused' : 'main-search'">
+    <input (input)="searchChanged($event)"(focus)="searchFocused = true" (blur)="searchFocused = false" (keyup.enter)="search()" type="text" nz-input placeholder="Поиск" class="search-input"/>
+  </nz-input-group>
+  <ng-template #suffixIconButton>
+    <button nz-button nzType="text" nzShape="round" nzSize="large" class="search-icon-button">
+      <span nz-icon nzType="search" class="m-icon"></span>
+    </button>
+  </ng-template>
+  <div *ngIf="searchFocused && searchItems.length > 0" class="search-content">
+    <div class="search-item" *ngFor="let searchItem of searchItems; let last = last">
+      <a class="search-item-line" [class]="{'search-item-last' : last}">
+        <span nz-icon nzType="search" class="m-icon search-item-icon"></span>
+        <span nz-typography class="search-item-label"> {{ searchItem }}</span>
+      </a>
+      <nz-divider *ngIf="!last"></nz-divider>
+    </div>
+  </div>
+</div>

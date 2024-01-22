@@ -1,0 +1,83 @@
+@import "../../../styles.less";
+
+@divider-opacity: 33;
+
+.footer-container {
+  .area-container;
+  box-shadow: 0 5px 7px 3px #00000040;
+}
+
+.inner-footer-container {
+  .inner-area-container;
+}
+
+.footer-content {
+  //height: @footer-content-height;
+  padding: 20px 0 20px 0;
+}
+
+.bottom-menu-spacer {
+  height: @bottom-menu-height;
+  width: 100%;
+}
+
+nz-divider {
+  border-color: fade(@text-color-7, 20%);
+  border-width: 2px;
+  //margin: 15px 0 15px 0;
+}
+
+.title {
+  margin-bottom: 20px;
+  color: @text-color-6;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.contact-text {
+  font-size: 16px;
+  color: @text-color-2;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  color: @text-color-6;
+  font-weight: bold;
+}
+
+.contact-row {
+  display: flex;
+  column-gap: 10px;
+  align-items: baseline
+}
+
+.flex-row-pages {
+  .flex-row;
+  justify-content: normal;
+  column-gap: 40px;
+  row-gap: 20px;
+}
+
+.flex-row-additional {
+  .flex-row;
+  justify-content: normal;
+  column-gap: 20px;
+}
+
+.flex-row-bottom {
+  .flex-row;
+  row-gap: 20px;
+}
