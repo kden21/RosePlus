@@ -1,24 +1,28 @@
+using RosePlus.AppServices.Mappers.DateTimeMapper;
 using RosePlus.Contracts.Dto;
+using RosePlus.Contracts.Enums;
 using RosePlus.Domain.Entities;
 
 namespace RosePlus.AppServices.Mappers.Product;
 
+/// <summary>
+/// Маппер для <see cref="ProductEntity"/>>
+/// </summary>
 public static class ProductEntityMapper
 {
-    public static ProductEntity FillEntity(this ProductDto productDto)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="productEntity"></param>
+    /// <param name="productDto"></param>
+    public static void FillProductEntity(this ProductEntity productEntity, ProductDto productDto)
     {
-        return new ProductEntity
-        {
-            Id = productDto.Id,
-            CreateDate = DateTime.ParseExact(productDto.ModifyDate, "yyyy-MM-dd",
-                System.Globalization.CultureInfo.InvariantCulture),
-            ModifyDate = DateTime.ParseExact(productDto.ModifyDate, "yyyy-MM-dd",
-                System.Globalization.CultureInfo.InvariantCulture),
-            Name = productDto.Name,
-            Description = productDto.Description,
-            Price = productDto.Price,
-            Count = productDto.Count,
-            CategoryId = productDto.CategoryId
-        };
+        productEntity.Id = productDto.Id;
+        productEntity.Name = productDto.Name;
+        productEntity.Description = productDto.Description;
+        productEntity.Count = productDto.Count;
+        productEntity.Price = productDto.Price;
+        productEntity.CategoryId = productDto.CategoryId;
+        productEntity.Status = (StatusProduct)productDto.Status;
     }
 }

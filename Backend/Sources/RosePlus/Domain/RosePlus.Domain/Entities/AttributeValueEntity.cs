@@ -20,5 +20,13 @@ public class AttributeValueEntity : BaseEntity
     /// </summary>
     public AttributeEntity Attribute { get; set; }
     
-    public ICollection<ProductEntity> Products { get; set; }
+    /// <summary>
+    /// Идентификатор товара.
+    /// </summary>
+    public int ProductId { get; set; }
+    
+    /// <summary>
+    /// Товар.
+    /// </summary>
+    public ProductEntity Product { get; set; }
 }

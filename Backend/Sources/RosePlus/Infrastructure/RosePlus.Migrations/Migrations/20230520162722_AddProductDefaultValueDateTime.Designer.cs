@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RosePlus.Migrations;
@@ -11,9 +12,11 @@ using RosePlus.Migrations;
 namespace RosePlus.Migrations.Migrations
 {
     [DbContext(typeof(MigrationsDbContext))]
-    partial class MigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230520162722_AddProductDefaultValueDateTime")]
+    partial class AddProductDefaultValueDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,6 +40,21 @@ namespace RosePlus.Migrations.Migrations
                     b.ToTable("Category_Attribute", (string)null);
                 });
 
+            modelBuilder.Entity("AttributeValueEntityProductEntity", b =>
+                {
+                    b.Property<int>("AttributeValuesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("AttributeValuesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("Product_AttributeValue", (string)null);
+                });
+
             modelBuilder.Entity("RosePlus.Domain.Entities.AttributeEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -46,14 +64,10 @@ namespace RosePlus.Migrations.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("ModifyDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -77,17 +91,10 @@ namespace RosePlus.Migrations.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("CreateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("ModifyDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("current_timestamp at time zone 'UTC'");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Value")
                         .IsRequired()
@@ -98,7 +105,8 @@ namespace RosePlus.Migrations.Migrations
 
                     b.HasIndex("AttributeId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("Id")
+                        .IsUnique();
 
                     b.ToTable("AttributeValues", (string)null);
                 });
@@ -112,14 +120,10 @@ namespace RosePlus.Migrations.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("ModifyDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -161,7 +165,7 @@ namespace RosePlus.Migrations.Migrations
                         .HasColumnType("character varying(1000)");
 
                     b.Property<DateTime>("ModifyDate")
-                        .ValueGeneratedOnAdd()
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("current_timestamp at time zone 'UTC'");
 
@@ -198,6 +202,21 @@ namespace RosePlus.Migrations.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AttributeValueEntityProductEntity", b =>
+                {
+                    b.HasOne("RosePlus.Domain.Entities.AttributeValueEntity", null)
+                        .WithMany()
+                        .HasForeignKey("AttributeValuesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RosePlus.Domain.Entities.ProductEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("RosePlus.Domain.Entities.AttributeValueEntity", b =>
                 {
                     b.HasOne("RosePlus.Domain.Entities.AttributeEntity", "Attribute")
@@ -206,15 +225,7 @@ namespace RosePlus.Migrations.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RosePlus.Domain.Entities.ProductEntity", "Product")
-                        .WithMany("AttributeValues")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Attribute");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("RosePlus.Domain.Entities.CategoryEntity", b =>
@@ -247,11 +258,6 @@ namespace RosePlus.Migrations.Migrations
                     b.Navigation("ChildCategories");
 
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("RosePlus.Domain.Entities.ProductEntity", b =>
-                {
-                    b.Navigation("AttributeValues");
                 });
 #pragma warning restore 612, 618
         }

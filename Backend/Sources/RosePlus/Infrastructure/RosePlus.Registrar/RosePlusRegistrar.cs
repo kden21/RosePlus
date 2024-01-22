@@ -3,7 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RosePlus.AppServices.Repositories;
-using RosePlus.AppServices.Services;
+using RosePlus.AppServices.Services.Attribute;
+using RosePlus.AppServices.Services.AttributeValue;
+using RosePlus.AppServices.Services.Category;
+using RosePlus.AppServices.Services.Product;
 using RosePlus.DataAccess.Configurations;
 using RosePlus.DataAccess.Configurations.Interfaces;
 using RosePlus.DataAccess.Context;
@@ -19,7 +22,7 @@ public static class RosePlusRegistrar
         ConfigurationManager configuration = builder.Configuration;
         builder.Services
             .AddDataAccessServices()
-            .AddAppServices(configuration);
+            .AddAppServices();
         return builder;
     }
     private static IServiceCollection AddDataAccessServices(this IServiceCollection services)
@@ -33,17 +36,22 @@ public static class RosePlusRegistrar
 
         services.AddScoped(sp => (DbContext) sp.GetRequiredService<RosePlusContext>());
 
-        services.AddScoped( typeof(IRepository<>), typeof(Repository<>));
-        services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped<ILoggerDbRepository, LoggerRepository>();
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>))
+            .AddScoped<IProductRepository, ProductRepository>()
+            .AddScoped<ILoggerDbRepository, LoggerRepository>()
+            .AddScoped<ICategoryRepository, CategoryRepository>()
+            .AddScoped<IAttributeRepository, AttributeRepository>()
+            .AddScoped<IAttributeValueRepository, AttributeValueRepository>();
         
         return services;
     }
     
-    public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddAppServices(this IServiceCollection services)
     {
-        services.AddScoped<IProductService, ProductService>();
-        //services.
+        services.AddScoped<IProductService, ProductService>()
+            .AddScoped<ICategoryService, CategoryService>()
+            .AddScoped<IAttributeService, AttributeService>()
+            .AddScoped<IAttributeValueService, AttributeValueService>();
         
         return services;
     }

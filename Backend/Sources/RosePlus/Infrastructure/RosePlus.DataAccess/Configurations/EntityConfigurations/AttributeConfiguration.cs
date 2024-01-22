@@ -14,6 +14,9 @@ public class AttributeConfiguration : IEntityTypeConfiguration<AttributeEntity>
         builder.Property(a => a.Id).ValueGeneratedOnAdd();
     
         builder.Property(a => a.Name).HasMaxLength(400);
+        
+        builder.Property(a => a.CreateDate).HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+        builder.Property(a => a.ModifyDate).HasDefaultValueSql("current_timestamp at time zone 'UTC'");
 
         builder.HasMany(a => a.Categories)
             .WithMany(c => c.Attributes)

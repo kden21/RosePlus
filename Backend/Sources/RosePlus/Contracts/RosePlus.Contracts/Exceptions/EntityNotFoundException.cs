@@ -9,7 +9,7 @@ namespace RosePlus.Contracts.Exceptions;
 public class EntityNotFoundException : BaseException
 {
     public EntityNotFoundException(string logMessage)
-        : base(logMessage, ExceptionUserMessage.EntityCreate)
+        : base(logMessage, ExceptionUserMessage.EntityNotFound)
     {
     }
 }

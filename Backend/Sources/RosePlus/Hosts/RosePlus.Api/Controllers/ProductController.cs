@@ -1,9 +1,8 @@
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using RosePlus.AppServices.Services;
+using RosePlus.AppServices.Services.Product;
 using RosePlus.Contracts.ApiResult;
 using RosePlus.Contracts.Dto;
-using RosePlus.Contracts.Requests;
+using RosePlus.Contracts.Filters;
 
 namespace RosePlus.Api.Controllers;
 
@@ -11,7 +10,7 @@ namespace RosePlus.Api.Controllers;
 /// Работа с товаром.
 /// </summary>
 [ApiController]
-[Route("v1/[controller]")]
+[Route("v1/[controller]/[action]")]
 public class ProductController : BaseController
 {
     private readonly ILogger<ProductController> _logger;
@@ -33,13 +32,9 @@ public class ProductController : BaseController
     /// <returns>Результат.</returns>
     [HttpGet("{productId:int}", Name = "GetProductById")]
     [ProducesResponseType(typeof(ApiResult<ProductDto>), statusCode: 200)]
-    public async Task<IActionResult> GetProductByIdAsync([FromQuery] int productId, CancellationToken cancellation)
+    public async Task<IActionResult> GetProductByIdAsync(int productId, CancellationToken cancellation)
     {
-        
-        _logger.Log( LogLevel.Critical,"dddd");
-        var data = await _productService.GetProductByIdAsync(productId, cancellation);
-
-        return Success();
+        return Success(await _productService.GetProductByIdAsync(productId, cancellation));
     }
     
     /// <summary>
@@ -49,17 +44,31 @@ public class ProductController : BaseController
     /// <returns>Результат.</returns>
     [HttpGet(Name = "GetProducts")]
     [ProducesResponseType(typeof(IReadOnlyCollection<ProductDto>), statusCode: 200)]
-    public async Task<IActionResult> GetProductsAsync([FromQuery] ProductRequest productRequest,CancellationToken cancellation)
+    public async Task<IActionResult> GetProductsAsync([FromQuery] ProductFilter productFilter, CancellationToken cancellation)
     {
-        var data = await _productService.GetProductsAsync(productRequest, cancellation);
-        return Ok(data);
+        return Success(await _productService.GetProductsAsync(productFilter, cancellation));
+    }
+    
+    [HttpPut(Name = "UpdateProduct")]
+    [ProducesResponseType(typeof(int), statusCode: 200)]
+    public async Task<IActionResult> UpdateProductAsync([FromBody] ProductDto productDto, CancellationToken cancellation)
+    {
+        await _productService.UpdateProductAsync(productDto, cancellation);
+        return Success();
     }
     
     [HttpPost(Name = "AddProduct")]
     [ProducesResponseType(typeof(int), statusCode: 200)]
     public async Task<IActionResult> AddProductAsync([FromBody] ProductDto productDto, CancellationToken cancellation)
     {
-        var data = await _productService.AddProductAsync(productDto, cancellation);
-        return Ok(data);
+        return Success(await _productService.AddProductAsync(productDto, cancellation));
+    }
+    
+    [HttpDelete("{productId:int}", Name = "DeleteProduct")]
+    [ProducesResponseType(typeof(int), statusCode: 200)]
+    public async Task<IActionResult> DeleteProductAsync(int productId, CancellationToken cancellation)
+    {
+        await _productService.DeleteProductAsync(productId, cancellation);
+        return Success();
     }
 }

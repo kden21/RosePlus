@@ -8,16 +8,18 @@ public class AttributeValueConfiguration : IEntityTypeConfiguration<AttributeVal
 {
     public void Configure(EntityTypeBuilder<AttributeValueEntity> builder)
     {
-        builder.ToTable("AttributeValues")
-            .HasIndex(a => a.Id).IsUnique();
+        builder.ToTable("AttributeValues");
     
-        builder.HasKey(a => a.Id);
-        builder.Property(a => a.Id).ValueGeneratedOnAdd();
+        builder.HasKey(av => av.Id);
+        builder.Property(av => av.Id).ValueGeneratedOnAdd();
     
-        builder.Property(a => a.Value).HasMaxLength(400);
+        builder.Property(av => av.Value).HasMaxLength(400);
+        
+        builder.Property(av => av.CreateDate).HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+        builder.Property(av => av.ModifyDate).HasDefaultValueSql("current_timestamp at time zone 'UTC'");
 
         builder.HasOne(av => av.Attribute)
-            .WithMany(a => a.AttributeValues)
-            .HasForeignKey(a => a.AttributeId);
+            .WithMany(av => av.AttributeValues)
+            .HasForeignKey(av => av.AttributeId);
     }
 }
