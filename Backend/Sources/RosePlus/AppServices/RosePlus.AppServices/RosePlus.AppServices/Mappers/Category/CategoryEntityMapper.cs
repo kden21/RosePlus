@@ -7,7 +7,7 @@ public static class CategoryEntityMapper
 {
     public static void FillCategoryEntity(this  CategoryEntity categoryEntity, CategoryDto categoryDto)
     {
-        categoryEntity.Id = categoryDto.Id;
+        categoryEntity.Id = categoryDto.Id ?? 0;
         categoryEntity.Name = categoryDto.Name;
         categoryEntity.ParentCategoryId ??= categoryDto.ParentCategoryId;
     }

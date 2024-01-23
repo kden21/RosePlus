@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {WindowSize} from "../../enums/WindowSize";
-import {WindowService} from "../../services/WindowService";
+import {WindowService} from "../../services/window-service";
 import { environment } from "../../../environments/environment";
 
 @Component({

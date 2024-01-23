@@ -47,6 +47,7 @@ public class CategoryService : ICategoryService
     {
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.FillCategoryEntity(categoryDto);
+        categoryEntity.Id = 0;
         return await _categoryRepository.AddCategory(categoryEntity, cancellationToken);
     }
 
