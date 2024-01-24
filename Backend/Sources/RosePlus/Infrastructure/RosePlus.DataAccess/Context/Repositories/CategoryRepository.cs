@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RosePlus.AppServices.Repositories;
+using RosePlus.Contracts.Constants;
+using RosePlus.Contracts.Filters;
 using RosePlus.Domain.Entities;
 
 namespace RosePlus.DataAccess.Context.Repositories;
@@ -23,9 +25,22 @@ public class CategoryRepository : ICategoryRepository
         return _repository.GetEntityById(categoryId, cancellationToken);
     }
 
-    public Task<List<CategoryEntity>> GetAllCategories(CancellationToken cancellationToken)
+    /// <inheritdoc />
+    public Task<List<CategoryEntity>> GetAllCategories(CategoryFilter filter, CancellationToken cancellationToken)
     {
-        return _repository.GetAllEntities().ToListAsync(cancellationToken);
+        var query = _repository.GetAllEntities()
+            .Include(c => c.ChildCategories).AsQueryable();
+        
+        if (filter.ParentCategoryId.HasValue)
+        {
+            query = query.Where(c => c.ParentCategoryId.HasValue && c.ParentCategoryId == filter.ParentCategoryId);
+        }
+
+        return query.Skip(filter.Skip ?? 0)
+            .Take(filter.Count is <= CommonConstants.TakeCountDefault
+                ? filter.Count.Value
+                : CommonConstants.TakeCountDefault)
+            .ToListAsync(cancellationToken);
     }
 
     /// <inheritdoc />

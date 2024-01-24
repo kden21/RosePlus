@@ -1,4 +1,5 @@
 using RosePlus.Contracts.Dto;
+using RosePlus.Contracts.Filters;
 
 namespace RosePlus.AppServices.Services.Category;
 
@@ -18,9 +19,10 @@ public interface ICategoryService
     /// <summary>
     /// Метод для получения всех категорий.
     /// </summary>
+    /// <param name="filter">Параметры фильтрации.</param>
     /// <param name="cancellationToken">Токен отмены действия.</param>
     /// <returns>Список категорий.</returns>
-    Task<List<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken);
+    Task<List<CategoryDto>> GetAllCategoriesAsync(CategoryFilter filter, CancellationToken cancellationToken);
 
     /// <summary>
     /// Метод добавления категории.

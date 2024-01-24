@@ -10,5 +10,6 @@ public static class CategoryDtoMapper
         categoryDto.Id = categoryEntity.Id;
         categoryDto.Name = categoryEntity.Name;
         categoryDto.ParentCategoryId = categoryEntity.ParentCategoryId;
+        categoryDto.IsChildCategoriesExist = categoryEntity.ChildCategories.Any();
     }
 }

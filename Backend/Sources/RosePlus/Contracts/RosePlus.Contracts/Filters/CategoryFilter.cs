@@ -1,6 +1,12 @@
 namespace RosePlus.Contracts.Filters;
 
-public class CategoryFilter
+/// <summary>
+/// Параметры для фильтрации категорий.
+/// </summary>
+public class CategoryFilter : BaseFilter
 {
-    public int[] ParentCategoryIds { get; set; }
+    /// <summary>
+    /// Идентификатор родительской категории.
+    /// </summary>
+    public int? ParentCategoryId { get; set; }
 }

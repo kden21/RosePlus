@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using RosePlus.AppServices.Services.Category;
 using RosePlus.Contracts.ApiResult;
 using RosePlus.Contracts.Dto;
+using RosePlus.Contracts.Filters;
 
 namespace RosePlus.Api.Controllers;
 
@@ -38,13 +39,14 @@ public class CategoryController : BaseController
     /// <summary>
     /// Метод для получения коллекции категорий.
     /// </summary>
+    /// <param name="filter">Параметры для фильтрации.</param>
     /// <param name="cancellation">Токен отмены действия.</param>
     /// <returns>Результат.</returns>
     [HttpGet(Name = "GetCategories")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryDto>), statusCode: 200)]
-    public async Task<IActionResult> GetCategoriesAsync(CancellationToken cancellation)
+    public async Task<IActionResult> GetCategoriesAsync([FromQuery]CategoryFilter filter, CancellationToken cancellation)
     {
-        return Success(await _categoryService.GetAllCategoriesAsync(cancellation));
+        return Success(await _categoryService.GetAllCategoriesAsync(filter, cancellation));
     }
     
     /// <summary>

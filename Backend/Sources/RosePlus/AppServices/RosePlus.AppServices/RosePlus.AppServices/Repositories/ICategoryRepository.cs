@@ -1,3 +1,4 @@
+using RosePlus.Contracts.Filters;
 using RosePlus.Domain.Entities;
 
 namespace RosePlus.AppServices.Repositories;
@@ -18,9 +19,10 @@ public interface ICategoryRepository
     /// <summary>
     /// Метод для получения всех категорий.
     /// </summary>
+    /// <param name="filter">Параметры фильтрации.</param>
     /// <param name="cancellationToken">Токен отмены действия.</param>
     /// <returns>Список категорий.</returns>
-    Task<List<CategoryEntity>> GetAllCategories(CancellationToken cancellationToken);
+    Task<List<CategoryEntity>> GetAllCategories(CategoryFilter filter, CancellationToken cancellationToken);
 
     /// <summary>
     /// Метод добавления категории.

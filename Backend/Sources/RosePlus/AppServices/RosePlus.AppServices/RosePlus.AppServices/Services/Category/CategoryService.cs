@@ -1,6 +1,7 @@
 using RosePlus.AppServices.Mappers.Category;
 using RosePlus.AppServices.Repositories;
 using RosePlus.Contracts.Dto;
+using RosePlus.Contracts.Filters;
 using RosePlus.Domain.Entities;
 
 namespace RosePlus.AppServices.Services.Category;
@@ -28,9 +29,9 @@ public class CategoryService : ICategoryService
     }
     
     /// <inheritdoc />
-    public async Task<List<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken)
+    public async Task<List<CategoryDto>> GetAllCategoriesAsync(CategoryFilter filter, CancellationToken cancellationToken)
     {
-        IEnumerable<CategoryEntity> categoryEntities =  await _categoryRepository.GetAllCategories(cancellationToken);
+        IEnumerable<CategoryEntity> categoryEntities =  await _categoryRepository.GetAllCategories(filter, cancellationToken);
         List<CategoryDto> categoryDtos = new List<CategoryDto>();
         foreach (var categoryEntitiy in categoryEntities)
         {

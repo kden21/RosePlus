@@ -19,4 +19,9 @@ public class CategoryDto
     /// Идентификатор родительской категории.
     /// </summary>
     public int? ParentCategoryId { get; set; }
+
+    /// <summary>
+    /// Признак наличия подкатегорий.
+    /// </summary>
+    public bool IsChildCategoriesExist { get; set; }
 }
