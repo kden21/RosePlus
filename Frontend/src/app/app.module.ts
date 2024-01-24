@@ -19,7 +19,7 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzTypographyModule} from "ng-zorro-antd/typography";
 import {NzBackTopModule} from "ng-zorro-antd/back-top";
 import {NzInputModule} from "ng-zorro-antd/input";
-import {WindowService} from "./services/WindowService";
+import {WindowService} from "./services/window-service";
 import { HeaderSearchComponent } from './components/header-search/header-search.component';
 import { HeaderTopComponent } from './components/header-top/header-top.component';
 import { ContentComponent } from './components/content/content.component';
@@ -37,6 +37,8 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
 import { DeliveryPageComponent } from './pages/delivery-page/delivery-page.component';
 import {BreadcrumbModule} from "xng-breadcrumb";
+import {HttpService} from "./services/http-service";
+import {CategoryService} from "./services/category-service";
 
 registerLocaleData(ru);
 
@@ -79,7 +81,9 @@ registerLocaleData(ru);
   ],
   providers: [
     { provide: NZ_I18N, useValue: ru_RU },
-    WindowService
+    WindowService,
+    HttpService,
+    CategoryService,
   ],
   bootstrap: [AppComponent]
 })

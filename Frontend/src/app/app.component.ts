@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {WindowService} from "./services/WindowService";
+import {WindowService} from "./services/window-service";
 import {WindowSize} from "./enums/WindowSize";
 @Component({
   selector: 'app-root',

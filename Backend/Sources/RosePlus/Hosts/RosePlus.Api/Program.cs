@@ -39,6 +39,13 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseCors(policyBuilder => policyBuilder.WithOrigins(app.Configuration.GetSection("CorsOrigins").Value ?? string.Empty)
+    .AllowAnyMethod()
+    .WithHeaders("accept", "content-type", "origin", "accept-encoding", "accept-language", "refer")
+    .AllowCredentials());
+
+app.UseStaticFiles();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
