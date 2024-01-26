@@ -136,6 +136,57 @@ namespace RosePlus.Migrations.Migrations
                     b.ToTable("Categories", (string)null);
                 });
 
+            modelBuilder.Entity("RosePlus.Domain.Entities.Files.FileEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("Content")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<DateTime>("CreateDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+
+                    b.Property<string>("Extension")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<bool>("IsCompressed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsWatermark")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("current_timestamp at time zone 'UTC'");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("character varying(400)");
+
+                    b.Property<int?>("OrderNumber")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Files", (string)null);
+                });
+
             modelBuilder.Entity("RosePlus.Domain.Entities.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
