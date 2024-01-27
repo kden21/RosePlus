@@ -16,4 +16,8 @@
       <ProjectReference Include="..\..\Domain\RosePlus.Domain\RosePlus.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Configurations\EntityConfigurations\Files\ProductFileConfiguration.cs" />
+    </ItemGroup>
+
 </Project>

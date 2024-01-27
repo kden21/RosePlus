@@ -10,4 +10,8 @@
       <ProjectReference Include="..\..\Contracts\RosePlus.Contracts\RosePlus.Contracts.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Entities\Files\ProductFileEntity.cs" />
+    </ItemGroup>
+
 </Project>

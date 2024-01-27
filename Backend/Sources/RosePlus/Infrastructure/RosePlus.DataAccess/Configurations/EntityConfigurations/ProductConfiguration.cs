@@ -25,5 +25,9 @@ public class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
         builder.HasMany(p => p.AttributeValues)
             .WithOne(av => av.Product)
             .HasForeignKey(p => p.ProductId);
+
+        builder.HasMany(p => p.Photos)
+            .WithMany()
+            .UsingEntity(b => b.ToTable("Product_File"));
     }
 }

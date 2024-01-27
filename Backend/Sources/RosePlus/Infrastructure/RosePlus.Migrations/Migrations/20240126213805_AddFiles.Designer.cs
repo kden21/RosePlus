@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RosePlus.Migrations;
@@ -11,9 +12,11 @@ using RosePlus.Migrations;
 namespace RosePlus.Migrations.Migrations
 {
     [DbContext(typeof(MigrationsDbContext))]
-    partial class MigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240126213805_AddFiles")]
+    partial class AddFiles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,21 +38,6 @@ namespace RosePlus.Migrations.Migrations
                     b.HasIndex("CategoriesId");
 
                     b.ToTable("Category_Attribute", (string)null);
-                });
-
-            modelBuilder.Entity("FileEntityProductEntity", b =>
-                {
-                    b.Property<int>("PhotosId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProductEntityId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("PhotosId", "ProductEntityId");
-
-                    b.HasIndex("ProductEntityId");
-
-                    b.ToTable("Product_File", (string)null);
                 });
 
             modelBuilder.Entity("RosePlus.Domain.Entities.AttributeEntity", b =>
@@ -260,21 +248,6 @@ namespace RosePlus.Migrations.Migrations
                     b.HasOne("RosePlus.Domain.Entities.CategoryEntity", null)
                         .WithMany()
                         .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FileEntityProductEntity", b =>
-                {
-                    b.HasOne("RosePlus.Domain.Entities.Files.FileEntity", null)
-                        .WithMany()
-                        .HasForeignKey("PhotosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RosePlus.Domain.Entities.ProductEntity", null)
-                        .WithMany()
-                        .HasForeignKey("ProductEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

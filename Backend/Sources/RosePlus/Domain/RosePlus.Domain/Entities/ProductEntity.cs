@@ -1,4 +1,5 @@
 using RosePlus.Contracts.Enums;
+using RosePlus.Domain.Entities.Files;
 
 namespace RosePlus.Domain.Entities;
 
@@ -43,4 +44,9 @@ public class ProductEntity : BaseEntity
     /// Коллекция значений атрибутов.
     /// </summary>
     public ICollection<AttributeValueEntity> AttributeValues { get; set; }
+    
+    /// <summary>
+    /// Коллекция фотографий.
+    /// </summary>
+    public ICollection<FileEntity> Photos  { get; set; }
 }

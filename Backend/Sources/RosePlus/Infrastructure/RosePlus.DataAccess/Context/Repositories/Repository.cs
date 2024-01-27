@@ -40,9 +40,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity: BaseEntit
         if (model == null)
             throw new EntityCreateException($"Модель представления не может быть null");
         
-        //model.CreateDate = DateTime.UtcNow;
-        //model.ModifyDate = model.CreateDate;
-        
         var entityEntry = await DbContext.AddAsync(model, cancellation);
         
         try
